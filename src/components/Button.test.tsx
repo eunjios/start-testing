@@ -1,15 +1,30 @@
-import { logRoles } from '@testing-library/dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Button from './Button';
 
-test('button starts with correct color', () => {
-  const { container } = render(<Button />);
-  logRoles(container); // <button class="_button_29f8d0 _white_29f8d0" />
+test('button starts with correct label and color', () => {
+  // render Button
+  render(<Button />);
 
-  const buttonElement = screen.getByRole('button');
+  // find the button
+  const buttonElement = screen.getByRole('button', { name: /black/i });
+
+  // check initial color
   expect(buttonElement.className.includes('white')).toBeTruthy();
 });
 
-test('button has correct color after click', () => {});
+test('button has correct label and color after click', () => {
+  // render App
+  render(<Button />);
 
-test('button has correct text after click', () => {});
+  // find the button
+  const buttonElement = screen.getByRole('button', { name: /black/i });
+
+  // click the button
+  fireEvent.click(buttonElement);
+
+  // check button text
+  expect(buttonElement).toHaveTextContent(/white/i);
+
+  // check button color
+  expect(buttonElement.className.includes('black')).toBeTruthy();
+});

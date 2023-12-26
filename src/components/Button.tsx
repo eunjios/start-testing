@@ -6,6 +6,7 @@ function Button() {
   const btnClass = `${classes.button} ${
     isWhite ? classes.white : classes.black
   }`;
+  const text = `Change to ${isWhite ? 'Black' : 'White'}!`;
 
   const toggle = () => {
     setIsWhite((prev) => !prev);
@@ -14,7 +15,7 @@ function Button() {
   return (
     <div className={classes.container}>
       <button onClick={toggle} className={btnClass}>
-        Change to Black!
+        {text}
       </button>
     </div>
   );
